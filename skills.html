@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills - Mr E | Solution Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1d29 !important;
+            --secondary: #3b82f6 !important;
+            --accent: #06b6d4 !important;
+            --neutral: #64748b !important;
+            --bg-gradient: linear-gradient(135deg, var(--primary, #1a1d29) 0%, #0f172a 100%) !important;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1d29 !important;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .skill-category {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .skill-item {
+            background: rgba(30, 41, 59, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .radar-container {
+            height: 500px;
+            width: 100%;
+        }
+        
+        .tech-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body class="bg-pattern">
+    <!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-space font-bold text-2xl gradient-text">Saurabh Mishra</div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="hidden md:flex space-x-8">
+                        <a href="index.html#home" class="nav-link text-slate-300 hover:text-white">Home</a>
+                        <a href="skills.html" class="nav-link text-slate-300 hover:text-white">Skills</a>
+                        <a href="blog.html" class="nav-link text-slate-300 hover:text-white">Articles</a>
+                    </div>
+                    <!-- Social icons -->
+                    <div class="flex items-center space-x-3">
+                        <a href="https://github.com/saurabh2mishra" aria-label="GitHub" target="_blank" class="text-slate-300 hover:text-white">
+                            <!-- GitHub SVG -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0.5C5.73 0.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.06-.73.08-.72.08-.72 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.72 1.27 3.38.97.11-.76.41-1.27.75-1.56-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.21 1.18a11.1 11.1 0 012.92-.39c.99.01 1.99.13 2.92.39 2.23-1.49 3.21-1.18 3.21-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.68.8.56A11.52 11.52 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/saurabh-mishra-2a788379 aria-label="LinkedIn" target="_blank" class="text-slate-300 hover:text-white">
+                            <!-- LinkedIn SVG -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.47 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8.99h4.94V24H0V8.99zM8.27 8.99h4.73v2.02h.07c.66-1.25 2.28-2.56 4.7-2.56 5.03 0 5.96 3.31 5.96 7.62V24h-4.94v-6.88c0-1.64-.03-3.75-2.29-3.75-2.29 0-2.64 1.79-2.64 3.63V24H8.27V8.99z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-5xl lg:text-6xl font-bold font-space mb-6 gradient-text">Technical Skills</h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Comprehensive expertise across data engineering, machine learning, cloud architecture, and platform engineering
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Radar Chart -->
+    <section id="skills" class="py-12 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-8 rounded-xl">
+                <h2 class="text-3xl font-bold font-space mb-8 text-center gradient-text">Skills Proficiency Radar</h2>
+                <div id="skills-radar" class="radar-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skill Categories -->
+    <section class="py-12 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold font-space mb-12 text-center gradient-text">Skill Categories</h2>
+            
+            <!-- Data Engineering -->
+            <div class="skill-category p-8 rounded-xl mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="tech-icon">📊</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-400">Data Engineering</h3>
+                        <p class="text-slate-300">Building scalable data pipelines and architectures</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Data Engineering</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Expert - 8+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Databricks</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 94%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Expert - 5+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Data Warehousing</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 7+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Apache Spark</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 90%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 6+ years</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Machine Learning -->
+            <div class="skill-category p-8 rounded-xl mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="tech-icon">🤖</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-cyan-400">Machine Learning & AI</h3>
+                        <p class="text-slate-300">Developing intelligent algorithms and models</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Machine Learning</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 90%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 6+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Generative AI</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 88%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 3+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">PyTorch</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 4+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">SciKit-Learn</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 87%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 5+ years</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud & DevOps -->
+            <div class="skill-category p-8 rounded-xl mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="tech-icon">☁️</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-400">Cloud & DevOps</h3>
+                        <p class="text-slate-300">Cloud infrastructure and automation expertise</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Azure Cloud</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Expert - 7+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Azure DevOps</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 89%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 6+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Platform Engineering</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 86%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 5+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Bicep</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 82%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Intermediate - 3+ years</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programming -->
+            <div class="skill-category p-8 rounded-xl mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="tech-icon">💻</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-cyan-400">Programming Languages</h3>
+                        <p class="text-slate-300">Core programming and scripting skills</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Python</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 96%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Expert - 8+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">SQL</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 94%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Expert - 9+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Shell Scripting</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 83%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 7+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">PowerShell</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 78%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Intermediate - 4+ years</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture & Management -->
+            <div class="skill-category p-8 rounded-xl">
+                <div class="flex items-center mb-6">
+                    <div class="tech-icon">🏗️</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-blue-400">Architecture & Management</h3>
+                        <p class="text-slate-300">System design and stakeholder management</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">System Design</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 91%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Expert - 7+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Architecture</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 93%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Expert - 8+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Stakeholder Management</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 88%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Advanced - 6+ years</p>
+                    </div>
+                    <div class="skill-item p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-200 mb-2">Solution Architecture</h4>
+                        <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Expert - 8+ years</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-slate-400 font-mono">
+                    © 2024 Saurabh Mishra. Built with passion for data and AI.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize skills radar chart
+        document.addEventListener('DOMContentLoaded', function() {
+            initSkillsRadar();
+            initScrollReveal();
+            initSkillAnimations();
+        });
+        
+        function initSkillsRadar() {
+            const chartDom = document.getElementById('skills-radar');
+            const myChart = echarts.init(chartDom);
+            
+            const skillsData = [
+                { name: 'Data Engineering', value: 90 },
+                { name: 'Machine Learning', value: 80 },
+                { name: 'Azure Cloud', value: 80 },
+                { name: 'Generative AI', value: 78 },
+                { name: 'Databricks', value: 90 },
+                { name: 'Python', value: 90 },
+                { name: 'SQL', value: 90 },
+                { name: 'System Design', value: 85 },
+                { name: 'Architecture', value: 85 },
+                { name: 'PyTorch', value: 80 },
+                { name: 'Azure DevOps', value: 85 },
+                { name: 'Platform Engineering', value: 80 }
+            ];
+            
+            const option = {
+                backgroundColor: 'transparent',
+                tooltip: {
+                    trigger: 'item',
+                    backgroundColor: 'rgba(30, 41, 59, 0.9)',
+                    borderColor: '#3b82f6',
+                    textStyle: {
+                        color: '#e2e8f0'
+                    },
+                    formatter: function(params) {
+                        return `<strong>${params.name}</strong><br/>Proficiency: ${params.value}%`;
+                    }
+                },
+                radar: {
+                    indicator: skillsData.map(skill => ({
+                        name: skill.name,
+                        max: 100,
+                        color: '#e2e8f0'
+                    })),
+                    center: ['50%', '50%'],
+                    radius: '70%',
+                    axisName: {
+                        color: '#e2e8f0',
+                        fontSize: 12,
+                        fontWeight: 'bold'
+                    },
+                    splitArea: {
+                        areaStyle: {
+                            color: [
+                                'rgba(59, 130, 246, 0.1)',
+                                'rgba(59, 130, 246, 0.05)',
+                                'rgba(6, 182, 212, 0.1)',
+                                'rgba(6, 182, 212, 0.05)'
+                            ]
+                        }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(148, 163, 184, 0.3)'
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(148, 163, 184, 0.5)'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Skills',
+                    type: 'radar',
+                    data: [{
+                        value: skillsData.map(skill => skill.value),
+                        name: 'Technical Skills',
+                        areaStyle: {
+                            color: 'rgba(59, 130, 246, 0.3)'
+                        },
+                        lineStyle: {
+                            color: '#3b82f6',
+                            width: 3
+                        },
+                        itemStyle: {
+                            color: '#06b6d4',
+                            borderColor: '#3b82f6',
+                            borderWidth: 2
+                        },
+                        emphasis: {
+                            areaStyle: {
+                                color: 'rgba(6, 182, 212, 0.4)'
+                            }
+                        }
+                    }],
+                    animationDuration: 2000,
+                    animationEasing: 'cubicOut'
+                }]
+            };
+            
+            myChart.setOption(option);
+            
+            // Make chart responsive
+            window.addEventListener('resize', function() {
+                myChart.resize();
+            });
+        }
+        
+        function initScrollReveal() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        function initSkillAnimations() {
+            // Animate skill items on hover
+            document.querySelectorAll('.skill-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    anime({
+                        targets: this,
+                        scale: 1.02,
+                        duration: 200,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    anime({
+                        targets: this,
+                        scale: 1,
+                        duration: 200,
+                        easing: 'easeOutQuad'
+                    });
+                });
+            });
+            
+            // Animate skill categories
+            document.querySelectorAll('.skill-category').forEach(category => {
+                category.addEventListener('mouseenter', function() {
+                    anime({
+                        targets: this,
+                        translateY: -2,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                
+                category.addEventListener('mouseleave', function() {
+                    anime({
+                        targets: this,
+                        translateY: 0,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+            });
+        }
+        
+        // Navigation background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-slate-900/90');
+            } else {
+                nav.classList.remove('bg-slate-900/90');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Saurabh Mishra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1d29 !important;
+            --secondary: #3b82f6 !important;
+            --accent: #06b6d4 !important;
+            --neutral: #64748b !important;
+            --bg-gradient: linear-gradient(135deg, var(--primary, #1a1d29) 0%, #0f172a 100%) !important;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1d29 !important;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .blog-card {
+            background: rgba(30, 41, 59, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .blog-card:hover::before {
+            left: 100%;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+            border-color: var(--secondary);
+        }
+        
+        .category-tag {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .category-tag:hover {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: var(--secondary);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .search-input {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .featured-badge {
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="bg-pattern">
+    <!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-space font-bold text-2xl gradient-text">Saurabh Mishra</div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="hidden md:flex space-x-8">
+                        <a href="index.html#home" class="nav-link text-slate-300 hover:text-white">Home</a>
+                        <a href="skills.html" class="nav-link text-slate-300 hover:text-white">Skills</a>
+                        <a href="blog.html" class="nav-link text-slate-300 hover:text-white">Articles</a>
+                    </div>
+                    <!-- Social icons -->
+                    <div class="flex items-center space-x-3">
+                        <a href="https://github.com/saurabh2mishra" aria-label="GitHub" target="_blank" class="text-slate-300 hover:text-white">
+                            <!-- GitHub SVG -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0.5C5.73 0.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.06-.73.08-.72.08-.72 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.72 1.27 3.38.97.11-.76.41-1.27.75-1.56-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.21 1.18a11.1 11.1 0 012.92-.39c.99.01 1.99.13 2.92.39 2.23-1.49 3.21-1.18 3.21-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.68.8.56A11.52 11.52 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/saurabh-mishra-2a788379 aria-label="LinkedIn" target="_blank" class="text-slate-300 hover:text-white">
+                            <!-- LinkedIn SVG -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.47 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8.99h4.94V24H0V8.99zM8.27 8.99h4.73v2.02h.07c.66-1.25 2.28-2.56 4.7-2.56 5.03 0 5.96 3.31 5.96 7.62V24h-4.94v-6.88c0-1.64-.03-3.75-2.29-3.75-2.29 0-2.64 1.79-2.64 3.63V24H8.27V8.99z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-5xl lg:text-6xl font-bold font-space mb-6 gradient-text">Articles</h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Insights on data engineering, machine learning, cloud architecture, and technology trends
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Categories -->
+    <section class="py-8 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-6 rounded-xl mb-8">
+                <div class="flex flex-col lg:flex-row gap-6 items-center">
+                    <div class="flex-1">
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="Search articles..." 
+                            class="search-input w-full px-4 py-3 rounded-lg text-slate-200 placeholder-slate-400 focus:outline-none"
+                        >
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="category-tag active px-4 py-2 rounded-lg text-sm font-semibold" data-category="all">All</button>
+                        <button class="category-tag px-4 py-2 rounded-lg text-sm font-semibold" data-category="data-engineering">Data Engineering</button>
+                        <button class="category-tag px-4 py-2 rounded-lg text-sm font-semibold" data-category="machine-learning">Machine Learning</button>
+                        <button class="category-tag px-4 py-2 rounded-lg text-sm font-semibold" data-category="cloud">Cloud & DevOps</button>
+                        <button class="category-tag px-4 py-2 rounded-lg text-sm font-semibold" data-category="ai">AI & Analytics</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="py-12 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold font-space mb-8 gradient-text">Featured Articles</h2>
+            
+            <!-- Featured Article 1: Airflow -->
+            <div class="blog-card p-8 rounded-xl mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <span class="featured-badge text-white px-3 py-1 rounded-full text-sm font-semibold mr-3">Featured</span>
+                            <span class="text-slate-400 text-sm font-mono">Dec 15, 2024</span>
+                            <span class="mx-2 text-slate-400">•</span>
+                            <span class="text-slate-400 text-sm font-mono">12 min read</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4 text-blue-400">Orchestration with Apache Airflow - A beginner's guide for project-based learning</h3>
+                        <p class="text-slate-300 mb-6 leading-relaxed">
+                            A comprehensive beginner's guide to Apache Airflow, covering workflow orchestration fundamentals, 
+                            DAG creation, and practical project-based learning approaches for data pipeline automation.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-600/20 text-blue-400 px-3 py-1 rounded-full text-xs font-mono">Apache Airflow</span>
+                            <span class="bg-cyan-600/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-mono">Data Engineering</span>
+                            <span class="bg-blue-600/20 text-blue-400 px-3 py-1 rounded-full text-xs font-mono">Orchestration</span>
+                            <span class="bg-cyan-600/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-mono">Python</span>
+                        </div>
+                        <a href="https://medium.com/analytics-vidhya/orchestration-with-apache-airflow-a-beginners-guide-for-project-based-learning-77c6c31d6323" target="_blank" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 inline-block">
+                            Read on Medium
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Article 2: Data Lifecycle -->
+            <div class="blog-card p-8 rounded-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <span class="bg-cyan-600/20 text-cyan-400 px-3 py-1 rounded-full text-sm font-semibold mr-3">Popular</span>
+                            <span class="text-slate-400 text-sm font-mono">Dec 10, 2024</span>
+                            <span class="mx-2 text-slate-400">•</span>
+                            <span class="text-slate-400 text-sm font-mono">10 min read</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4 text-cyan-400">Data Lifecycle of Machine Learning Project</h3>
+                        <p class="text-slate-300 mb-6 leading-relaxed">
+                            Explore the complete data lifecycle in machine learning projects, from data collection and preprocessing 
+                            to model training and deployment. Essential guide for ML practitioners.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-cyan-600/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-mono">Machine Learning</span>
+                            <span class="bg-blue-600/20 text-blue-400 px-3 py-1 rounded-full text-xs font-mono">Data Lifecycle</span>
+                            <span class="bg-cyan-600/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-mono">MLOps</span>
+                            <span class="bg-blue-600/20 text-blue-400 px-3 py-1 rounded-full text-xs font-mono">Data Science</span>
+                        </div>
+                        <a href="https://medium.com/analytics-vidhya/data-lifecycle-of-machine-learning-project-83b2e656911d" target="_blank" class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 inline-block">
+                            Read on Medium
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Blog Posts -->
+    <section id="blog" class="py-12 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold font-space mb-12 gradient-text">All Articles</h2>
+            
+            <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Article 1: Delta Lake -->
+                <div class="blog-card p-6 rounded-xl" data-category="data-engineering">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-blue-600/20 text-blue-400 px-2 py-1 rounded-full text-xs font-mono mr-3">Delta Lake</span>
+                        <span class="text-slate-400 text-sm font-mono">Dec 5, 2024</span>
+                        <span class="mx-2 text-slate-400">•</span>
+                        <span class="text-slate-400 text-sm font-mono">8 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-400">Demystifying Delta Lake</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Understanding Delta Lake architecture, its benefits for data reliability, ACID transactions, 
+                        and how it revolutionizes data lakehouse architectures.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="https://medium.com/analytics-vidhya/demystifying-delta-lake-d15869fd3470" target="_blank" class="text-blue-400 hover:text-blue-300 font-semibold text-sm">Read More →</a>
+                        <div class="flex items-center text-slate-400 text-xs">
+                            <span class="mr-1">👁️</span>
+                            <span>3.2k views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 2: Python Generators -->
+                <div class="blog-card p-6 rounded-xl" data-category="data-engineering">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-cyan-600/20 text-cyan-400 px-2 py-1 rounded-full text-xs font-mono mr-3">Python</span>
+                        <span class="text-slate-400 text-sm font-mono">Nov 28, 2024</span>
+                        <span class="mx-2 text-slate-400">•</span>
+                        <span class="text-slate-400 text-sm font-mono">6 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cyan-400">Optimize your code with Python Generator</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Learn how Python generators can optimize memory usage and improve performance in data processing tasks. 
+                        Practical examples for data engineers and scientists.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="https://medium.com/analytics-vidhya/optimize-your-code-with-python-generator-9498b6ea1fa4" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold text-sm">Read More →</a>
+                        <div class="flex items-center text-slate-400 text-xs">
+                            <span class="mr-1">👁️</span>
+                            <span>2.1k views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 3: Data Ethics -->
+                <div class="blog-card p-6 rounded-xl" data-category="ai">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-purple-600/20 text-purple-400 px-2 py-1 rounded-full text-xs font-mono mr-3">Ethics</span>
+                        <span class="text-slate-400 text-sm font-mono">Nov 22, 2024</span>
+                        <span class="mx-2 text-slate-400">•</span>
+                        <span class="text-slate-400 text-sm font-mono">9 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-purple-400">Data Ethics in Artificial Intelligence & Machine Learning</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Essential considerations for ethical AI development, including bias detection, fairness metrics, 
+                        privacy protection, and responsible AI frameworks.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="https://medium.com/analytics-vidhya/data-ethics-in-artificial-intelligence-machine-learning-72467b9c70f3" target="_blank" class="text-purple-400 hover:text-purple-300 font-semibold text-sm">Read More →</a>
+                        <div class="flex items-center text-slate-400 text-xs">
+                            <span class="mr-1">👁️</span>
+                            <span>4.5k views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 4: MLflow -->
+                <div class="blog-card p-6 rounded-xl" data-category="machine-learning">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-cyan-600/20 text-cyan-400 px-2 py-1 rounded-full text-xs font-mono mr-3">MLOps</span>
+                        <span class="text-slate-400 text-sm font-mono">Nov 18, 2024</span>
+                        <span class="mx-2 text-slate-400">•</span>
+                        <span class="text-slate-400 text-sm font-mono">11 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cyan-400">Managing Machine Learning Life cycle with MLflow</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Complete guide to MLflow for managing the end-to-end machine learning lifecycle, including experiment tracking, 
+                        model versioning, and deployment automation.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="https://medium.com/analytics-vidhya/managing-machine-learning-life-cycle-with-mlflow-3bea291d771b" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold text-sm">Read More →</a>
+                        <div class="flex items-center text-slate-400 text-xs">
+                            <span class="mr-1">👁️</span>
+                            <span>3.8k views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 5: ML Interpretability -->
+                <div class="blog-card p-6 rounded-xl" data-category="machine-learning">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-blue-600/20 text-blue-400 px-2 py-1 rounded-full text-xs font-mono mr-3">XAI</span>
+                        <span class="text-slate-400 text-sm font-mono">Nov 15, 2024</span>
+                        <span class="mx-2 text-slate-400">•</span>
+                        <span class="text-slate-400 text-sm font-mono">13 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-400">Interpretability of Machine Learning models</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Understanding model interpretability techniques, including SHAP, LIME, and feature importance methods. 
+                        Making black-box models transparent and trustworthy.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="https://medium.com/analytics-vidhya/interpretability-of-machine-learning-models-9787cf8a3789" target="_blank" class="text-blue-400 hover:text-blue-300 font-semibold text-sm">Read More →</a>
+                        <div class="flex items-center text-slate-400 text-xs">
+                            <span class="mr-1">👁️</span>
+                            <span>2.9k views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 6: Data Governance -->
+                <div class="blog-card p-6 rounded-xl" data-category="data-engineering">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-green-600/20 text-green-400 px-2 py-1 rounded-full text-xs font-mono mr-3">Governance</span>
+                        <span class="text-slate-400 text-sm font-mono">Nov 12, 2024</span>
+                        <span class="mx-2 text-slate-400">•</span>
+                        <span class="text-slate-400 text-sm font-mono">7 min</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-green-400">Data Governance in Modern Data Platforms</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Best practices for implementing data governance frameworks, data quality monitoring, 
+                        and compliance in modern cloud-based data platforms.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-green-400 hover:text-green-300 font-semibold text-sm">Read More →</a>
+                        <div class="flex items-center text-slate-400 text-xs">
+                            <span class="mr-1">👁️</span>
+                            <span>1.7k views</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="no-results" class="hidden text-center py-12">
+                <div class="text-6xl mb-4">📝</div>
+                <h3 class="text-2xl font-bold text-slate-300 mb-2">No articles found</h3>
+                <p class="text-slate-400">Try adjusting your search or category filter</p>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button id="load-more" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300">
+                    Load More Articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 scroll-reveal">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-12 rounded-xl text-center">
+                <h2 class="text-3xl font-bold font-space mb-6 gradient-text">Stay Updated</h2>
+                <p class="text-xl text-slate-300 mb-8">
+                    Follow me on Medium for the latest insights on data engineering, machine learning, and AI
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://medium.com/@saurabh2.mishra" target="_blank" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300">
+                        Follow on Medium
+                    </a>
+                    <a href="https://nl.linkedin.com/in/saurabh-mishra-2a788379" target="_blank" class="glass-card text-white px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300">
+                        Follow on LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-slate-400 font-mono">
+                    © 2024 Saurabh Mishra - Solution Architect. Built with passion for data and AI.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initBlogFiltering();
+            initScrollReveal();
+            initBlogAnimations();
+        });
+        
+        function initBlogFiltering() {
+            const searchInput = document.getElementById('search-input');
+            const categoryButtons = document.querySelectorAll('.category-tag');
+            const blogCards = document.querySelectorAll('.blog-card');
+            const noResults = document.getElementById('no-results');
+            
+            let currentCategory = 'all';
+            let currentSearch = '';
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                currentSearch = this.value.toLowerCase();
+                filterArticles();
+            });
+            
+            // Category buttons
+            categoryButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    categoryButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentCategory = this.getAttribute('data-category');
+                    filterArticles();
+                });
+            });
+            
+            function filterArticles() {
+                let visibleCount = 0;
+                
+                blogCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    const tags = Array.from(card.querySelectorAll('.font-mono')).map(tag => tag.textContent.toLowerCase()).join(' ');
+                    
+                    const matchesCategory = currentCategory === 'all' || category.includes(currentCategory);
+                    const matchesSearch = currentSearch === '' || 
+                        title.includes(currentSearch) || 
+                        description.includes(currentSearch) || 
+                        tags.includes(currentSearch);
+                    
+                    if (matchesCategory && matchesSearch) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                        
+                        // Animate in
+                        anime({
+                            targets: card,
+                            opacity: [0, 1],
+                            translateY: [30, 0],
+                            duration: 400,
+                            delay: visibleCount * 100,
+                            easing: 'easeOutQuad'
+                        });
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide no results message
+                if (visibleCount === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                }
+            }
+        }
+        
+        function initScrollReveal() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        function initBlogAnimations() {
+            // Blog card hover animations
+            document.querySelectorAll('.blog-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    anime({
+                        targets: this,
+                        translateY: -8,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    anime({
+                        targets: this,
+                        translateY: 0,
+                        duration: 300,
+                        easing: 'easeOutQuad'
+                    });
+                });
+            });
+            
+            // Category button animations
+            document.querySelectorAll('.category-tag').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        anime({
+                            targets: this,
+                            scale: 1.05,
+                            duration: 200,
+                            easing: 'easeOutQuad'
+                        });
+                    }
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        anime({
+                            targets: this,
+                            scale: 1,
+                            duration: 200,
+                            easing: 'easeOutQuad'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Load more functionality
+        document.getElementById('load-more').addEventListener('click', function() {
+            const button = this;
+            button.textContent = 'Loading...';
+            button.disabled = true;
+            
+            // Simulate loading more articles
+            setTimeout(() => {
+                showNotification('More articles loaded! 📚', 'success');
+                button.textContent = 'Load More Articles';
+                button.disabled = false;
+            }, 1500);
+        });
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm transform translate-x-full transition-transform duration-300 ${
+                type === 'success' ? 'bg-green-600' : 
+                type === 'error' ? 'bg-red-600' : 'bg-blue-600'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <div class="flex-shrink-0">
+                        ${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}
+                    </div>
+                    <div class="text-white font-medium">${message}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Animate out and remove
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 4000);
+        }
+        
+        // Navigation background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-slate-900/90');
+            } else {
+                nav.classList.remove('bg-slate-900/90');
+            }
+        });
+        
+        // Add click handlers for external links
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.hostname !== window.location.hostname) {
+                    e.preventDefault();
+                    window.open(this.href, '_blank', 'noopener,noreferrer');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

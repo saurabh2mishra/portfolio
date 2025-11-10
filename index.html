@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saurabh Mishra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1d29 !important;
+            --secondary: #3b82f6 !important;
+            --accent: #06b6d4 !important;
+            --neutral: #64748b !important;
+            --bg-gradient: linear-gradient(135deg, var(--primary, #1a1d29) 0%, #0f172a 100%) !important;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1d29 !important;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+        
+        .skill-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        /* .project-card {
+            background: rgba(30, 41, 59, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+         */
+        /* .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.6s ease;
+        } */
+        
+        /* .project-card:hover::before {
+            left: 100%;
+        } */
+        
+        .blog-card {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(6, 182, 212, 0.2);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            to { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .stats-counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+        }
+
+        #typed-text {
+            white-space: nowrap;
+            overflow: visible;
+            min-width: max-content;
+        }
+    </style>
+</head>
+<body class="bg-pattern">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-space font-bold text-2xl gradient-text">Saurabh Mishra</div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#home" class="nav-link text-slate-300 hover:text-white">Home</a>
+                        <a href="skills.html" class="nav-link text-slate-300 hover:text-white">Skills</a>
+                        <a href="blog.html" class="nav-link text-slate-300 hover:text-white">Articles</a>
+                    </div>
+                    <!-- Social icons -->
+                    <div class="flex items-center space-x-3">
+                        <a href="https://github.com/saurabh2mishra" aria-label="GitHub" target="_blank" class="text-slate-300 hover:text-white">
+                            <!-- GitHub SVG -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0.5C5.73 0.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.06-.73.08-.72.08-.72 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.72 1.27 3.38.97.11-.76.41-1.27.75-1.56-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.21 1.18a11.1 11.1 0 012.92-.39c.99.01 1.99.13 2.92.39 2.23-1.49 3.21-1.18 3.21-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.68.8.56A11.52 11.52 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/saurabh-mishra-2a788379 aria-label="LinkedIn" target="_blank" class="text-slate-300 hover:text-white">
+                            <!-- LinkedIn SVG -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.47 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8.99h4.94V24H0V8.99zM8.27 8.99h4.73v2.02h.07c.66-1.25 2.28-2.56 4.7-2.56 5.03 0 5.96 3.31 5.96 7.62V24h-4.94v-6.88c0-1.64-.03-3.75-2.29-3.75-2.29 0-2.64 1.79-2.64 3.63V24H8.27V8.99z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-12 md:pt-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h1 id="typed-text" class="text-5xl lg:text-7xl font-bold font-space mb-6 gradient-text -mt-0 md:-mt-12 lg:-mt-20"></h1>
+                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
+                    I'm Saurabh, currently working as a Solution Architect specializing in Data and AI. Throughout my career, I've worked in various data-centric roles with different capacities, and I love building, solutioning, and learning all the cool things around Data. In my spare time, I run, play cricket, read books, and write blogs about data engineering, machine learning, and technology.
+                    </p>
+                </div>
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <div class="w-80 h-80 rounded-full overflow-hidden border-4 border-blue-500/30 floating">
+                            <img src="resources/saurabhmishra.JPG" alt="Saurabh Mishra" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full opacity-20 animate-pulse"></div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full opacity-30 animate-pulse delay-1000"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Overview -->
+    <section class="py-20 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold font-space mb-6 gradient-text">Technical Skills</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div class="skill-card p-6 rounded-xl text-center hover-lift">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-600/20 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">📊</span>
+                    </div>
+                    <h3 class="font-semibold text-slate-200 mb-2">Data Engineering</h3>
+                    <div class="w-full bg-slate-700 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-card p-6 rounded-xl text-center hover-lift">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-cyan-600/20 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🤖</span>
+                    </div>
+                    <h3 class="font-semibold text-slate-200 mb-2">Machine Learning</h3>
+                    <div class="w-full bg-slate-700 rounded-full h-2">
+                        <div class="bg-cyan-500 h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-card p-6 rounded-xl text-center hover-lift">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-600/20 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">☁️</span>
+                    </div>
+                    <h3 class="font-semibold text-slate-200 mb-2">Azure Cloud</h3>
+                    <div class="w-full bg-slate-700 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-card p-6 rounded-xl text-center hover-lift">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-cyan-600/20 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🔥</span>
+                    </div>
+                    <h3 class="font-semibold text-slate-200 mb-2">Generative AI</h3>
+                    <div class="w-full bg-slate-700 rounded-full h-2">
+                        <div class="bg-cyan-500 h-2 rounded-full" style="width: 82%"></div>
+                    </div>
+                </div>
+                <div class="skill-card p-6 rounded-xl text-center hover-lift">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-600/20 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h3 class="font-semibold text-slate-200 mb-2">Databricks</h3>
+                    <div class="w-full bg-slate-700 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-card p-6 rounded-xl text-center hover-lift">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-cyan-600/20 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🐍</span>
+                    </div>
+                    <h3 class="font-semibold text-slate-200 mb-2">Python</h3>
+                    <div class="w-full bg-slate-700 rounded-full h-2">
+                        <div class="bg-cyan-500 h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="skills.html" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300">
+                    View Detailed Skills
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Preview -->
+    <!-- <section class="py-20 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold font-space mb-6 gradient-text">Blogs</h2>
+                <p class="text-xl text-slate-300">Insights on data engineering, machine learning, and technology</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="blog-card p-6 rounded-xl hover-lift">
+                    <div class="flex items-center text-sm text-slate-400 mb-3">
+                        <span class="font-mono">December 15, 2024</span>
+                        <span class="mx-2">•</span>
+                        <span class="font-mono">8 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-400">Optimizing Apache Spark for Large-Scale Data Processing</h3>
+                    <p class="text-slate-300 text-sm mb-4">Advanced techniques for optimizing Spark performance in enterprise data pipelines...</p>
+                    <a href="blog.html" class="text-blue-400 hover:text-blue-300 font-semibold text-sm">Read More →</a>
+                </div>
+                <div class="blog-card p-6 rounded-xl hover-lift">
+                    <div class="flex items-center text-sm text-slate-400 mb-3">
+                        <span class="font-mono">December 10, 2024</span>
+                        <span class="mx-2">•</span>
+                        <span class="font-mono">12 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cyan-400">ML Model Deployment Patterns in Azure</h3>
+                    <p class="text-slate-300 text-sm mb-4">Best practices for deploying machine learning models using Azure ML and MLOps...</p>
+                    <a href="blog.html" class="text-cyan-400 hover:text-cyan-300 font-semibold text-sm">Read More →</a>
+                </div>
+                <div class="blog-card p-6 rounded-xl hover-lift">
+                    <div class="flex items-center text-sm text-slate-400 mb-3">
+                        <span class="font-mono">December 5, 2024</span>
+                        <span class="mx-2">•</span>
+                        <span class="font-mono">10 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-400">Databricks Performance Tuning Guide</h3>
+                    <p class="text-slate-300 text-sm mb-4">Comprehensive guide to optimizing Databricks clusters and queries for better performance...</p>
+                    <a href="blog.html" class="text-blue-400 hover:text-blue-300 font-semibold text-sm">Read More →</a>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="blog.html" class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300">
+                    View All Posts
+                </a>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Contact section removed as requested -->
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-slate-400 font-mono">
+                    © 2024 Saurabh Mishra. Built with passion for Data and AI.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
