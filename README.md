@@ -1,3 +1,1 @@
-# Saurabh Mishra
-
 Welcome to my GitHub profile page! I'm a passionate Solution Architect specializing in Data and AI solutions with extensive experience in building scalable, enterprise-grade systems.
