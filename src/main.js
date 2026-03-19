@@ -1,33 +1,36 @@
 const capabilities = [
   {
-    title: 'Data Engineering',
-    description: 'Designing reliable data products, orchestration patterns, and scalable analytics foundations.',
-    accent: '95%',
+    title: 'AI & Machine Learning',
+    description: 'Building and shipping practical AI & ML workflows with production-minded experimentation, deployment, and monitoring.',
   },
-  {
-    title: 'Machine Learning',
-    description: 'Shipping practical ML workflows with production-minded experimentation, deployment, and monitoring.',
-    accent: '88%',
+   {
+    title: 'Data Engineering',
+    description: 'Designing and developing reliable data products, orchestration patterns, and scalable analytics foundations.',
   },
   {
     title: 'Azure Cloud',
     description: 'Architecting secure, cost-aware cloud platforms across storage, compute, networking, and governance.',
-    accent: '92%',
   },
   {
-    title: 'Databricks & Spark',
-    description: 'Improving batch and streaming pipelines with lakehouse patterns and performance tuning.',
-    accent: '90%',
+    title: 'Data Management & Analytics',
+    description: 'Building robust data management and analytics solutions for enterprise needs.',
   },
 ];
 
 const projects = [
   {
-    title: 'Enterprise Lakehouse Modernization',
+    title: 'Lakehouse Modernization for Enterprise Content Management',
     summary:
-      'Led the design of a modern analytics architecture using Azure and Databricks to simplify ingestion, improve governance, and accelerate reporting.',
-    impact: ['Unified siloed data sources', 'Improved pipeline observability', 'Enabled scalable BI consumption'],
-    tag: 'Architecture',
+      'Led the design of a modern analytics architecture using Azure and Databricks to simplify - Document ingestion, sharing content to AI applications, improve governance, and accelerate AI usecases across the enterprise.',
+    impact: ['Unified Document Data Products', 'Context Store', 'Improved pipeline observability', 'Enabled scalable AI consumption'],
+    tag: 'Data & AI Architecture',
+  },
+    {
+    title: 'Cloud Data Platform Governance',
+    summary:
+      'Established governance guardrails, environment strategy, and operational practices for a multi-team Azure data platform.',
+    impact: ['Stronger security posture', 'More predictable deployments', 'Lower operational risk'],
+    tag: 'Platform Engineering',
   },
   {
     title: 'ML Delivery Enablement',
@@ -35,13 +38,6 @@ const projects = [
       'Supported ML teams with production-ready patterns for feature engineering, experimentation, and deployment workflows that reduced handoff friction.',
     impact: ['Clearer model promotion paths', 'Reusable engineering standards', 'Better cross-team collaboration'],
     tag: 'Machine Learning',
-  },
-  {
-    title: 'Cloud Data Platform Governance',
-    summary:
-      'Established governance guardrails, environment strategy, and operational practices for a multi-team Azure data platform.',
-    impact: ['Stronger security posture', 'More predictable deployments', 'Lower operational risk'],
-    tag: 'Platform Engineering',
   },
 ];
 
@@ -64,7 +60,7 @@ const articles = [
     title: 'More writing on Medium',
     description:
       'Additional articles on data engineering, analytics, and cloud architecture for practitioners who value applied learning.',
-    href: 'https://medium.com/@saurabh2mishra',
+    href: 'https://medium.com/@saurabh2.mishra',
     meta: 'Medium • Knowledge sharing',
   },
 ];
@@ -84,7 +80,6 @@ function renderCapabilities() {
         <article class="surface reveal capability-card">
           <div class="capability-card__header">
             <h3>${item.title}</h3>
-            <span>${item.accent}</span>
           </div>
           <p>${item.description}</p>
         </article>
