@@ -26,17 +26,17 @@ const projects = [
     tag: 'Data & AI Architecture',
   },
     {
-    title: 'Cloud Data Platform Governance',
+    title: 'Cloud Data Platform Design & Implementation',
     summary:
-      'Established governance guardrails, environment strategy, and operational practices for a multi-team Azure data platform.',
-    impact: ['Stronger security posture', 'More predictable deployments', 'Lower operational risk'],
+      'Designed and created Azure Cloud Data Platform for Data & AI workloads.',
+    impact: ['Robust data platform', 'Data pipelines', 'Efficient deployments', 'Lower operational risk'],
     tag: 'Platform Engineering',
   },
   {
-    title: 'ML Delivery Enablement',
+    title: 'ML Application Development',
     summary:
-      'Supported ML teams with production-ready patterns for feature engineering, experimentation, and deployment workflows that reduced handoff friction.',
-    impact: ['Clearer model promotion paths', 'Reusable engineering standards', 'Better cross-team collaboration'],
+      'As part of a cross-functional team, created and operationalized several ML applications in Production.',
+    impact: ['From Experimentation to Production', 'MLOps practices', 'Reusable engineering standards', 'Better cross-team collaboration'],
     tag: 'Machine Learning',
   },
 ];
