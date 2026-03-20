@@ -21,7 +21,7 @@ const projects = [
   {
     title: 'Unstructured Data Modernization for Enterprise Content Management',
     summary:
-      'Led the design of a modern analytics architecture to simplify - Document ingestion, sharing content to AI applications, improve governance, and accelerate AI usecases across the enterprise content management.',
+      'Led the design of architecture to support efficient Document ingestion, sharing AI ready content to LLM backed applications, improve governance, and accelerate AI usecases across the enterprise content management.',
     impact: ['Unified Document Data Products', 'Context Store', 'Improved pipeline observability', 'Enabled scalable AI consumption'],
     tag: 'Data & AI Architecture',
   },
