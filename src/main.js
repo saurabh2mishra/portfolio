@@ -19,9 +19,9 @@ const capabilities = [
 
 const projects = [
   {
-    title: 'Lakehouse Modernization for Enterprise Content Management',
+    title: 'Unstructured Data Modernization for Enterprise Content Management',
     summary:
-      'Led the design of a modern analytics architecture using Azure and Databricks to simplify - Document ingestion, sharing content to AI applications, improve governance, and accelerate AI usecases across the enterprise.',
+      'Led the design of a modern analytics architecture to simplify - Document ingestion, sharing content to AI applications, improve governance, and accelerate AI usecases across the enterprise content management.',
     impact: ['Unified Document Data Products', 'Context Store', 'Improved pipeline observability', 'Enabled scalable AI consumption'],
     tag: 'Data & AI Architecture',
   },
