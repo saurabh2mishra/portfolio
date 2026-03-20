@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://saurabh2mishra.github.io/saurabh_pflo/sitemap.xml
